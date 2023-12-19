@@ -4,11 +4,20 @@
  */
 package Admin;
 
-import Main.GMS;
-import Main.HomeScreen;
+import Home.HomeScreen;
+import Machines.AddMachines;
+import static Main.GymManagementSystem.con;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static utilities.Constance.memberPrice;
 
 /**
  *
@@ -84,7 +93,6 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        TXT_UserName.setText(" ");
         TXT_UserName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TXT_UserNameActionPerformed(evt);
@@ -181,12 +189,27 @@ public class Admin extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
-        String UserName = TXT_UserName.getText();
-        String Password = TXT_Password.getText();
-//        if (TXT_UserName.getText()=="Abdo"&&TXT_Password.getText()=="1234") {
+        // SELECT * FROM gms.admin where name = "ff" and  password = 12;
+        boolean isFound = false;
+         try {
+            PreparedStatement s = con.prepareStatement("SELECT * FROM gms.admin where name = ? and password = ?" );
+            s.setString(1, TXT_UserName.getText());
+            s.setString(2, TXT_Password.getText());
+            ResultSet res = s.executeQuery();
+            isFound = res.next();
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(AddMachines.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         if (isFound){
             close();
             HomeScreen home = new HomeScreen();
             home.setVisible(true);
+         } else {
+            JOptionPane.showMessageDialog(null, "incorrect username or password...!");
+         }
+//        if (TXT_UserName.getText()=="Abdo"&&TXT_Password.getText()=="1234") {
+           
 //        } else {
 //            JOptionPane.showMessageDialog(this, "UserName or Password is Wrong!", "Failed", 0);
 //        }

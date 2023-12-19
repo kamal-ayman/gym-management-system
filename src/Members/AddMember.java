@@ -12,8 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 
-
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -61,11 +62,11 @@ public class AddMember extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         add_btn1 = new javax.swing.JButton();
         lbl_gender1 = new javax.swing.JLabel();
-        age = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add A Member");
@@ -102,18 +103,23 @@ public class AddMember extends javax.swing.JFrame {
         lbl_date.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_date.setText("Registraition :");
 
-        name.setText(" ");
+        name.setToolTipText("");
 
-        id.setText(" ");
-
-        phone_txt.setText(" ");
-
-        email_txt.setText(" ");
+        id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idActionPerformed(evt);
+            }
+        });
 
         buttonGroup2.add(rbtn_private);
         rbtn_private.setText("Private coach");
 
         price.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "120", "150", "170", "200" }));
+        price.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceActionPerformed(evt);
+            }
+        });
 
         gender.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         gender.setText("Member gender :");
@@ -128,6 +134,11 @@ public class AddMember extends javax.swing.JFrame {
         buttonGroup2.add(rbtn_public);
         rbtn_public.setSelected(true);
         rbtn_public.setText("Public coach");
+        rbtn_public.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtn_publicActionPerformed(evt);
+            }
+        });
 
         add_btn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         add_btn.setForeground(new java.awt.Color(0, 0, 204));
@@ -157,11 +168,11 @@ public class AddMember extends javax.swing.JFrame {
         lbl_gender1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_gender1.setText("Age :");
 
-        age.setText(" ");
-
         jLabel1.setText("from");
 
         jLabel2.setText("to");
+
+        jSpinner1.setValue(18);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -206,26 +217,25 @@ public class AddMember extends javax.swing.JFrame {
                                             .addComponent(add_btn1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                            .addComponent(rbtn_male, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGap(50, 50, 50)
+                                                            .addComponent(rbtn_female, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGap(48, 48, 48))
+                                                        .addComponent(price, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                                        .addComponent(rbtn_male, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(rbtn_private)
                                                         .addGap(50, 50, 50)
-                                                        .addComponent(rbtn_female, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(48, 48, 48))
-                                                    .addComponent(price, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                                    .addComponent(rbtn_private)
-                                                    .addGap(50, 50, 50)
-                                                    .addComponent(rbtn_public)))
-                                            .addComponent(email_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(phone_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(age, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(rbtn_public)))
+                                                .addComponent(email_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(phone_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                         .addGap(30, 30, 30))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -248,9 +258,9 @@ public class AddMember extends javax.swing.JFrame {
                         .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(rbtn_female, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbl_gender1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(age))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_gender1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -337,51 +347,83 @@ public class AddMember extends javax.swing.JFrame {
 
     private void addActionButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionButton
         // TODO add your handling code here:
-        String name= this.name.getText();
-        String id= this.id.getText();
+        String name = this.name.getText();
+        String id = this.id.getText();
         boolean isMale = rbtn_male.isSelected();
-        String age=this.age.getText();
-        String phoneNumber=this.phone_txt.getText();
-        String email=email_txt.getText();
+        String age = jSpinner1.getValue() + "";
+        String phoneNumber = this.phone_txt.getText();
+        String email = email_txt.getText();
         Date from = jDateChooser2.getDate();
         Date to = jDateChooser1.getDate();
-        boolean isPublic=rbtn_public.isSelected();
-        int price=this.price.getSelectedIndex();
-        MemberModel model = new MemberModel(name, id, isMale, age, phoneNumber, email, isPublic, price, from, to);
-        
+        boolean isPublic = rbtn_public.isSelected();
+        int price = this.price.getSelectedIndex();
+        MemberModel t = new MemberModel(name, id, isMale, age, phoneNumber, email, isPublic, price, from, to);
+        boolean isFound = false;
+        if (t.id.isEmpty() || t.name.isEmpty() || t.name.isEmpty() || t.name.isEmpty() || t.name.isEmpty() || t.name.isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "please complete your data...!");
+//            return;
+        }
+        try {
+            checkMember(t.id);
+            isFound = true;
+            JOptionPane.showMessageDialog(null, "this Serial Number currently used!");
+        } catch (SQLException ex) {
+        }
+//        return;
+        if (!isFound) {
+            try {
+                addMember(t);
+            } catch (SQLException ex1) {
+                System.out.println("error add");
+                Logger.getLogger(AddMember.class.getName()).log(Level.SEVERE, null, ex1);
+
+            }
+        }
     }//GEN-LAST:event_addActionButton
 
-    
     private void checkMember(String id) throws SQLException {
-        PreparedStatement s = con.prepareStatement("select id from member where id = " + "'" + id + "'" );
+        PreparedStatement s = con.prepareStatement("select id from member where id = " + "'" + id + "'");
         ResultSet res = s.executeQuery();
         System.out.println("value is ");
         res.next();
         System.out.println(res.getInt(1));
     }
-    
+
     private void addMember(MemberModel t) throws SQLException {
-            PreparedStatement stmt = con.prepareStatement("insert into member(id, name, gender, age, phone, email, sub_type, sub_price, reg_st, reg_en) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            stmt.setInt(1, Integer.parseInt(t.id));
-            stmt.setString(2,t.name);
-            stmt.setInt(3, t.isMale ? 1 : 0);
-            stmt.setInt(4, Integer.parseInt(t.age));
-            stmt.setString(5, t.phoneNumber);
-            stmt.setString(6, t.email);
-            stmt.setInt(7, t.isPublic ? 1 : 0);
-            stmt.setInt(8, t.price);
-            stmt.setDate(9, java.sql.Date.valueOf(t.from.toString()));
-            stmt.setDate(10, java.sql.Date.valueOf(t.to.toString()));
-            stmt.executeUpdate();
-            System.out.println("added successfully");
-//            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-//            model.addRow(new Object[]{machineName[t.name], t.sn, machineTrainingMusicale[t.trainingMusicale], t.tradeMark,  machinePower[t.power]});
+        PreparedStatement stmt = con.prepareStatement("insert into member(id, name, gender, age, phone, email, sub_type, sub_price, reg_st, reg_ed) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        stmt.setInt(1, Integer.parseInt(t.id));
+        stmt.setString(2, t.name);
+        stmt.setInt(3, t.isMale ? 1 : 0);
+        stmt.setInt(4, Integer.parseInt(t.age));
+        stmt.setString(5, t.phoneNumber);
+        stmt.setString(6, t.email);
+        stmt.setInt(7, t.isPublic ? 1 : 0);
+        stmt.setInt(8, t.price);
+        java.sql.Date from, to;
+        from = new java.sql.Date(t.from.getTime());
+        stmt.setDate(9, from);
+        to = new java.sql.Date(t.to.getTime());
+        stmt.setDate(10, to);
+        stmt.executeUpdate();
+        System.out.println("added successfully");
     }
     private void Members_btn(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Members_btn
         close();
         Members member = new Members();
         member.setVisible(true);
     }//GEN-LAST:event_Members_btn
+
+    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idActionPerformed
+
+    private void rbtn_publicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtn_publicActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtn_publicActionPerformed
+
+    private void priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceActionPerformed
     public void close() {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
@@ -398,7 +440,6 @@ public class AddMember extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add_btn;
     private javax.swing.JButton add_btn1;
-    private javax.swing.JTextField age;
     private javax.swing.JButton back_btn;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -414,6 +455,7 @@ public class AddMember extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel lbl_date;
     private javax.swing.JLabel lbl_email;
     private javax.swing.JLabel lbl_gender1;

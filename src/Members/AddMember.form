@@ -149,36 +149,35 @@
                                                       <Component id="add_btn1" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <Group type="102" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
                                                   <EmptySpace max="32767" attributes="0"/>
-                                                  <Group type="103" groupAlignment="1" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Group type="103" groupAlignment="1" attributes="0">
-                                                              <Group type="102" attributes="0">
-                                                                  <Component id="rbtn_male" min="-2" pref="142" max="-2" attributes="0"/>
-                                                                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                                                  <Component id="rbtn_female" min="-2" pref="100" max="-2" attributes="0"/>
-                                                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jSpinner1" min="-2" pref="119" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="1" attributes="0">
+                                                          <Group type="103" groupAlignment="0" attributes="0">
+                                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                                  <Group type="102" attributes="0">
+                                                                      <Component id="rbtn_male" min="-2" pref="142" max="-2" attributes="0"/>
+                                                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                                                      <Component id="rbtn_female" min="-2" pref="100" max="-2" attributes="0"/>
+                                                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                                                  </Group>
+                                                                  <Component id="price" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                                                               </Group>
-                                                              <Component id="price" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                                              <Group type="102" attributes="0">
+                                                                  <Component id="rbtn_private" min="-2" max="-2" attributes="0"/>
+                                                                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                                                  <Component id="rbtn_public" min="-2" max="-2" attributes="0"/>
+                                                              </Group>
                                                           </Group>
-                                                          <Group type="102" attributes="0">
-                                                              <Component id="rbtn_private" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                                              <Component id="rbtn_public" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
+                                                          <Component id="email_txt" min="-2" pref="340" max="-2" attributes="0"/>
+                                                          <Component id="phone_txt" min="-2" pref="340" max="-2" attributes="0"/>
+                                                          <Component id="id" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
+                                                          <Component id="name" min="-2" pref="340" max="-2" attributes="0"/>
                                                       </Group>
-                                                      <Component id="email_txt" min="-2" pref="340" max="-2" attributes="0"/>
-                                                      <Component id="phone_txt" min="-2" pref="340" max="-2" attributes="0"/>
-                                                      <Component id="id" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
-                                                      <Component id="name" min="-2" pref="340" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="age" min="-2" pref="340" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -211,9 +210,9 @@
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lbl_gender1" pref="30" max="32767" attributes="0"/>
-                              <Component id="age" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lbl_gender1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jSpinner1" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -330,23 +329,17 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="name">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value=" "/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="id">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value=" "/>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="phone_txt">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value=" "/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="email_txt">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value=" "/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="rbtn_private">
                   <Properties>
@@ -367,6 +360,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priceActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -404,6 +400,9 @@
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Public coach"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtn_publicActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="add_btn">
                   <Properties>
@@ -460,11 +459,6 @@
                     <Property name="text" type="java.lang.String" value="Age :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="age">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value=" "/>
-                  </Properties>
-                </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
@@ -477,6 +471,13 @@
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="to"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JSpinner" name="jSpinner1">
+                  <Properties>
+                    <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="18" type="code"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>

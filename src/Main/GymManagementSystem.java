@@ -4,7 +4,10 @@
  */
 package Main;
 
+import Admin.Admin;
 import Machines.AddMachines;
+import Members.AddMember;
+import Members.Members;
 import java.sql.*;
 /**
  *
@@ -26,7 +29,7 @@ public class GymManagementSystem {
 //             }
              
 
-        new AddMachines().setVisible(true);
+        new Admin().setVisible(true);
 
         } catch (SQLException ex) {
             

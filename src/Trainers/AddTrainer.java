@@ -4,7 +4,7 @@
  */
 package Trainers;
 
-import Main.HomeScreen;
+import Home.HomeScreen;
 import entities.TrainerModel;
 import static Main.GymManagementSystem.con;
 import java.awt.Toolkit;
