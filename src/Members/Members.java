@@ -114,7 +114,7 @@ public class Members extends javax.swing.JFrame {
         jLabel2.setText("Search by:");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Members/assets/dumbell (1).jpeg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/dumbell (1).jpeg"))); // NOI18N
         jLabel1.setText(" ");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "id", "phone" }));

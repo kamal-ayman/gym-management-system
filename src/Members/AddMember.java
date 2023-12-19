@@ -142,7 +142,7 @@ public class AddMember extends javax.swing.JFrame {
         back_btn.setForeground(new java.awt.Color(0, 0, 204));
         back_btn.setText("back");
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Members/assets/dumbell.jpeg"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/dumbell.jpeg"))); // NOI18N
         jLabel11.setText("jLabel11");
 
         add_btn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

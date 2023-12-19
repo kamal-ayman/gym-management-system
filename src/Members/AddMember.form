@@ -433,7 +433,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel11">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/Members/assets/dumbell.jpeg"/>
+                      <Image iconType="3" name="/Assets/dumbell.jpeg"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="jLabel11"/>
                   </Properties>
