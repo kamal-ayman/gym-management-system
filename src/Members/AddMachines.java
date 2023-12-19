@@ -4,6 +4,15 @@
  */
 package Members;
 
+import static Members.GymManagementSystem.con;
+import entities.MachineModel;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static utilities.Constance.*;
+
 /**
  *
  * @author DELL
@@ -110,13 +119,10 @@ public class AddMachines extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+                "Name", "Serial Number", "Training Muscle", "Trade Mark", "Power"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -124,6 +130,11 @@ public class AddMachines extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 204));
         jButton2.setText("Add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -254,6 +265,47 @@ public class AddMachines extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        MachineModel t = new MachineModel(jTextField2.getText(), jComboBox1.getSelectedIndex(), jComboBox2.getSelectedIndex(), jTextField4.getText(), jComboBox3.getSelectedIndex());
+        boolean isFound = false;
+        if (t.sn.isEmpty() || t.tradeMark.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "please complete your data...!");
+            return;
+        }
+        try {
+            checkMachine(t.sn);
+            isFound = true;
+            JOptionPane.showMessageDialog(null, "this Serial Number currently used!");
+        } catch (SQLException ex) {}
+        if (!isFound) {
+            try {
+                addMachine(t);
+            } catch (SQLException ex1) {
+                System.out.println("error add");
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
+    private void checkMachine(String sn) throws SQLException {
+        PreparedStatement s = con.prepareStatement("select sn from machines where sn = " + "'" + sn + "'" );
+        ResultSet res = s.executeQuery();
+        System.out.println("value is ");
+        res.next();
+        System.out.println(res.getInt(1));
+    }
+    
+    private void addMachine(MachineModel t) throws SQLException {
+            PreparedStatement stmt = con.prepareStatement("insert into machines(sn, name, training_musicale, trade_mark, power) values (?, ?, ?, ?, ?)");
+            stmt.setInt(1, Integer.parseInt(t.sn));
+            stmt.setInt(2,t.name);
+            stmt.setInt(3, t.trainingMusicale);
+            stmt.setString(4, t.tradeMark);
+            stmt.setInt(5, t.power);
+            stmt.executeUpdate();
+            System.out.println("added successfully");
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.addRow(new Object[]{machineName[t.name], t.sn, machineTrainingMusicale[t.trainingMusicale], t.tradeMark,  machinePower[t.power]});
+    }
     /**
      * @param args the command line arguments
      */
@@ -312,4 +364,6 @@ public class AddMachines extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
+
+   
 }

@@ -25,7 +25,7 @@ public class GymManagementSystem {
 //             }
              
 
-        new AddAdmin().setVisible(true);
+        new AddMachines().setVisible(true);
 
         } catch (SQLException ex) {
             
