@@ -3,13 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Members/assets/1.png</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/entities/AdminModel.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Members/AddTrainer.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Members/AddAdmin.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/entities/Constance.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Home/HomeScreen.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Members/AddMember.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Admin/Admin.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Admin/ResetPassword.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Main/GymManagementSystem.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Admin/GMS.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Machines/AddMachines.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Trainers/AddTrainer.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/utilities/Constance.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Members/Members.java</file>
             <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/entities/MemberModel.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/entities/TrainerModel.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Trainers/Trainers.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Admin/AddAdmin.java</file>
         </group>
     </open-files>
 </project-private>
