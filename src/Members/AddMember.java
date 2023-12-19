@@ -1,11 +1,25 @@
 package Members;
 
+import static Main.GymManagementSystem.con;
 import entities.MemberModel;
 import com.sun.tools.attach.AgentLoadException;
+import com.toedter.calendar.demo.DateChooserPanel;
+import entities.MachineModel;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Instant;
+
+
+import java.util.Date;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static utilities.Constance.machineName;
+import static utilities.Constance.machinePower;
+import static utilities.Constance.machineTrainingMusicale;
 
 public class AddMember extends javax.swing.JFrame {
 
@@ -43,16 +57,15 @@ public class AddMember extends javax.swing.JFrame {
         rbtn_female = new javax.swing.JRadioButton();
         rbtn_public = new javax.swing.JRadioButton();
         add_btn = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
         back_btn = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         add_btn1 = new javax.swing.JButton();
         lbl_gender1 = new javax.swing.JLabel();
         age = new javax.swing.JTextField();
-        s_month = new javax.swing.JComboBox<>();
-        s_day = new javax.swing.JTextField();
-        e_day = new javax.swing.JTextField();
-        e_month = new javax.swing.JComboBox<>();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add A Member");
@@ -78,7 +91,7 @@ public class AddMember extends javax.swing.JFrame {
         id_id.setText("Member ID :");
 
         lbl_email.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lbl_email.setText("Email Address :");
+        lbl_email.setText("Email :");
 
         lbl_sub_type.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_sub_type.setText("Subscribtion type :");
@@ -87,7 +100,7 @@ public class AddMember extends javax.swing.JFrame {
         lbl_sub_price.setText("Subscribtion's Price :");
 
         lbl_date.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lbl_date.setText("Registraition start $ end date :");
+        lbl_date.setText("Registraition :");
 
         name.setText(" ");
 
@@ -125,10 +138,6 @@ public class AddMember extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText(":");
-
         back_btn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         back_btn.setForeground(new java.awt.Color(0, 0, 204));
         back_btn.setText("back");
@@ -150,20 +159,9 @@ public class AddMember extends javax.swing.JFrame {
 
         age.setText(" ");
 
-        s_month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "Februay", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-        s_month.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                s_monthActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("from");
 
-        e_day.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                e_dayActionPerformed(evt);
-            }
-        });
-
-        e_month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "Februay", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        jLabel2.setText("to");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -175,11 +173,18 @@ public class AddMember extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lbl_gender1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lbl_date)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lbl_date)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lbl_title, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,27 +208,17 @@ public class AddMember extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                                    .addComponent(rbtn_private)
-                                                    .addGap(50, 50, 50)
-                                                    .addComponent(rbtn_public))
                                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                                         .addComponent(rbtn_male, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(50, 50, 50)
                                                         .addComponent(rbtn_female, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(32, 32, 32))
+                                                        .addGap(48, 48, 48))
                                                     .addComponent(price, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(jPanel2Layout.createSequentialGroup()
-                                                    .addComponent(s_day, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(s_month, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(e_day, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(e_month, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(rbtn_private)
+                                                    .addGap(50, 50, 50)
+                                                    .addComponent(rbtn_public)))
                                             .addComponent(email_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(phone_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,19 +270,13 @@ public class AddMember extends javax.swing.JFrame {
                     .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(s_month, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(s_day, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbl_date, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(e_month, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(e_day, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbl_date, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(add_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -348,37 +337,51 @@ public class AddMember extends javax.swing.JFrame {
 
     private void addActionButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionButton
         // TODO add your handling code here:
-        String name=this.name.getText();
-        String phoneNumber=this.phone_txt.getText();
+        String name= this.name.getText();
+        String id= this.id.getText();
+        boolean isMale = rbtn_male.isSelected();
         String age=this.age.getText();
+        String phoneNumber=this.phone_txt.getText();
         String email=email_txt.getText();
-        String id=this.id.getText();
-        int s_month=this.s_month.getSelectedIndex();
-        int e_month=this.e_month.getSelectedIndex();
+        Date from = jDateChooser2.getDate();
+        Date to = jDateChooser1.getDate();
         boolean isPublic=rbtn_public.isSelected();
-        boolean isMale=rbtn_male.isSelected();
         int price=this.price.getSelectedIndex();
-        String s_day=this.s_day.getText(); 
-        String e_day=this.e_day.getText();
-        MemberModel model = new MemberModel(name, id, isMale, age, age, email, isMale, price, s_day, s_day, e_day, e_day);
-//        close();
-        Members member =new Members(model);
-        member.setVisible(true);
+        MemberModel model = new MemberModel(name, id, isMale, age, phoneNumber, email, isPublic, price, from, to);
+        
     }//GEN-LAST:event_addActionButton
 
+    
+    private void checkMember(String id) throws SQLException {
+        PreparedStatement s = con.prepareStatement("select id from member where id = " + "'" + id + "'" );
+        ResultSet res = s.executeQuery();
+        System.out.println("value is ");
+        res.next();
+        System.out.println(res.getInt(1));
+    }
+    
+    private void addMember(MemberModel t) throws SQLException {
+            PreparedStatement stmt = con.prepareStatement("insert into member(id, name, gender, age, phone, email, sub_type, sub_price, reg_st, reg_en) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            stmt.setInt(1, Integer.parseInt(t.id));
+            stmt.setString(2,t.name);
+            stmt.setInt(3, t.isMale ? 1 : 0);
+            stmt.setInt(4, Integer.parseInt(t.age));
+            stmt.setString(5, t.phoneNumber);
+            stmt.setString(6, t.email);
+            stmt.setInt(7, t.isPublic ? 1 : 0);
+            stmt.setInt(8, t.price);
+            stmt.setDate(9, java.sql.Date.valueOf(t.from.toString()));
+            stmt.setDate(10, java.sql.Date.valueOf(t.to.toString()));
+            stmt.executeUpdate();
+            System.out.println("added successfully");
+//            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+//            model.addRow(new Object[]{machineName[t.name], t.sn, machineTrainingMusicale[t.trainingMusicale], t.tradeMark,  machinePower[t.power]});
+    }
     private void Members_btn(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Members_btn
         close();
         Members member = new Members();
         member.setVisible(true);
     }//GEN-LAST:event_Members_btn
-
-    private void s_monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s_monthActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_s_monthActionPerformed
-
-    private void e_dayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_e_dayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_e_dayActionPerformed
     public void close() {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
@@ -399,14 +402,15 @@ public class AddMember extends javax.swing.JFrame {
     private javax.swing.JButton back_btn;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JTextField e_day;
-    private javax.swing.JComboBox<String> e_month;
     private javax.swing.JTextField email_txt;
     private javax.swing.JLabel gender;
     private javax.swing.JTextField id;
     private javax.swing.JLabel id_id;
-    private javax.swing.JLabel jLabel10;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -425,7 +429,5 @@ public class AddMember extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbtn_male;
     private javax.swing.JRadioButton rbtn_private;
     private javax.swing.JRadioButton rbtn_public;
-    private javax.swing.JTextField s_day;
-    private javax.swing.JComboBox<String> s_month;
     // End of variables declaration//GEN-END:variables
 }

@@ -114,12 +114,19 @@
                                   <Component id="lbl_gender1" min="-2" pref="114" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="lbl_date" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="lbl_date" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="jLabel1" min="-2" pref="37" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jDateChooser2" min="-2" pref="125" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" min="-2" pref="23" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jDateChooser1" min="-2" pref="132" max="-2" attributes="0"/>
+                                      </Group>
                                       <Component id="lbl_title" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -145,31 +152,20 @@
                                               <Group type="102" attributes="0">
                                                   <EmptySpace max="32767" attributes="0"/>
                                                   <Group type="103" groupAlignment="1" attributes="0">
-                                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                                          <Group type="102" attributes="0">
-                                                              <Component id="rbtn_private" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                                              <Component id="rbtn_public" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
                                                           <Group type="103" groupAlignment="1" attributes="0">
                                                               <Group type="102" attributes="0">
                                                                   <Component id="rbtn_male" min="-2" pref="142" max="-2" attributes="0"/>
                                                                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                                                                   <Component id="rbtn_female" min="-2" pref="100" max="-2" attributes="0"/>
-                                                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                                               </Group>
                                                               <Component id="price" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                                                           </Group>
-                                                          <Group type="102" alignment="0" attributes="0">
-                                                              <Component id="s_day" min="-2" pref="40" max="-2" attributes="0"/>
-                                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                              <Component id="s_month" min="-2" pref="109" max="-2" attributes="0"/>
-                                                              <EmptySpace max="-2" attributes="0"/>
-                                                              <Component id="jLabel10" min="-2" pref="12" max="-2" attributes="0"/>
-                                                              <EmptySpace max="-2" attributes="0"/>
-                                                              <Component id="e_day" min="-2" pref="40" max="-2" attributes="0"/>
-                                                              <EmptySpace max="-2" attributes="0"/>
-                                                              <Component id="e_month" min="-2" pref="109" max="-2" attributes="0"/>
+                                                          <Group type="102" attributes="0">
+                                                              <Component id="rbtn_private" min="-2" max="-2" attributes="0"/>
+                                                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                                              <Component id="rbtn_public" min="-2" max="-2" attributes="0"/>
                                                           </Group>
                                                       </Group>
                                                       <Component id="email_txt" min="-2" pref="340" max="-2" attributes="0"/>
@@ -242,25 +238,15 @@
                           </Group>
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jLabel10" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jDateChooser1" pref="30" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lbl_date" alignment="3" pref="30" max="32767" attributes="0"/>
+                                  <Component id="jLabel1" alignment="3" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                          <Component id="s_month" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                          <Component id="s_day" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="lbl_date" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                          <Component id="e_month" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                          <Component id="e_day" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="jDateChooser2" max="32767" attributes="0"/>
+                              <Component id="jLabel2" max="32767" attributes="0"/>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="add_btn1" min="-2" pref="35" max="-2" attributes="0"/>
@@ -315,7 +301,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="12" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Email Address :"/>
+                    <Property name="text" type="java.lang.String" value="Email :"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lbl_sub_type">
@@ -339,7 +325,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="12" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Registraition start $ end date :"/>
+                    <Property name="text" type="java.lang.String" value="Registraition :"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="name">
@@ -433,15 +419,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Members_btn"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel10">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="14" style="1"/>
-                    </Property>
-                    <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value=":"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JButton" name="back_btn">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -488,61 +465,19 @@
                     <Property name="text" type="java.lang.String" value=" "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="s_month">
+                <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+                </Component>
+                <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel1">
                   <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="12">
-                        <StringItem index="0" value="January"/>
-                        <StringItem index="1" value="Februay"/>
-                        <StringItem index="2" value="March"/>
-                        <StringItem index="3" value="April"/>
-                        <StringItem index="4" value="May"/>
-                        <StringItem index="5" value="June"/>
-                        <StringItem index="6" value="July"/>
-                        <StringItem index="7" value="August"/>
-                        <StringItem index="8" value="September"/>
-                        <StringItem index="9" value="October"/>
-                        <StringItem index="10" value="November"/>
-                        <StringItem index="11" value="December"/>
-                      </StringArray>
-                    </Property>
+                    <Property name="text" type="java.lang.String" value="from"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="s_monthActionPerformed"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                  </AuxValues>
                 </Component>
-                <Component class="javax.swing.JTextField" name="s_day">
-                </Component>
-                <Component class="javax.swing.JTextField" name="e_day">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="e_dayActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JComboBox" name="e_month">
+                <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="12">
-                        <StringItem index="0" value="January"/>
-                        <StringItem index="1" value="Februay"/>
-                        <StringItem index="2" value="March"/>
-                        <StringItem index="3" value="April"/>
-                        <StringItem index="4" value="May"/>
-                        <StringItem index="5" value="June"/>
-                        <StringItem index="6" value="July"/>
-                        <StringItem index="7" value="August"/>
-                        <StringItem index="8" value="September"/>
-                        <StringItem index="9" value="October"/>
-                        <StringItem index="10" value="November"/>
-                        <StringItem index="11" value="December"/>
-                      </StringArray>
-                    </Property>
+                    <Property name="text" type="java.lang.String" value="to"/>
                   </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
