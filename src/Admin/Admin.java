@@ -7,14 +7,14 @@ package Admin;
 import Layout.GMS;
 import Home.HomeScreen;
 import Machines.AddMachines;
-import static utilities.MySQLConnection.con;
+import static utilities.Network.MySQLConnection.con;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import utilities.SharedFun;
+import utilities.Shared.SharedFun;
 
 /**
  *

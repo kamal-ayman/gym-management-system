@@ -6,14 +6,12 @@ package Trainers;
 
 import Home.HomeScreen;
 import entities.TrainerModel;
-import static utilities.MySQLConnection.con;
-import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
+import static utilities.Network.MySQLConnection.con;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import utilities.SharedFun;
+import utilities.Shared.SharedFun;
 
 /**
  *

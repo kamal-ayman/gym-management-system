@@ -1,6 +1,6 @@
 package Main;
 
-import utilities.MySQLConnection;
+import utilities.Network.MySQLConnection;
 
 public class GymManagementSystem {
 

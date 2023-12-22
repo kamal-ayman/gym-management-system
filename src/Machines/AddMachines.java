@@ -5,10 +5,8 @@
 package Machines;
 
 import Home.HomeScreen;
-import static utilities.MySQLConnection.con;
+import static utilities.Network.MySQLConnection.con;
 import entities.MachineModel;
-import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static utilities.Constance.*;
-import utilities.SharedFun;
+import utilities.Shared.SharedFun;
 
 /**
  *
@@ -317,8 +315,6 @@ public class AddMachines extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         SharedFun.navigateTo(this, new HomeScreen());
     }//GEN-LAST:event_jButton1ActionPerformed
-
-  
 
     private void checkMachine(String sn) throws SQLException {
         PreparedStatement s = con.prepareStatement("select sn from machines where sn = " + "'" + sn + "'");

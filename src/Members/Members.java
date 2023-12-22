@@ -5,10 +5,8 @@
 package Members;
 
 import Machines.AddMachines;
-import static utilities.MySQLConnection.con;
+import static utilities.Network.MySQLConnection.con;
 import entities.MemberModel;
-import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,11 +14,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import static utilities.Constance.machineName;
-import static utilities.Constance.machinePower;
-import static utilities.Constance.machineTrainingMusicale;
 import static utilities.Constance.memberPrice;
-import utilities.SharedFun;
+import utilities.Shared.SharedFun;
 
 /**
  *

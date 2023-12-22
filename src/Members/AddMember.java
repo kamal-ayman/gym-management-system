@@ -2,27 +2,15 @@ package Members;
 
 import Home.HomeScreen;
 import entities.MemberModel;
-import com.sun.tools.attach.AgentLoadException;
-import com.toedter.calendar.demo.DateChooserPanel;
-import entities.MachineModel;
-import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Instant;
-
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import static utilities.Constance.machineName;
-import static utilities.Constance.machinePower;
-import static utilities.Constance.machineTrainingMusicale;
-import static utilities.MySQLConnection.con;
-import utilities.SharedFun;
+import static utilities.Network.MySQLConnection.con;
+import utilities.Shared.SharedFun;
 
 public class AddMember extends javax.swing.JFrame {
 
@@ -431,7 +419,7 @@ public class AddMember extends javax.swing.JFrame {
     }//GEN-LAST:event_priceActionPerformed
 
     private void back_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_btnActionPerformed
-        SharedFun.navigateTo(this, new HomeScreen());      
+        SharedFun.navigateTo(this, new HomeScreen());
     }//GEN-LAST:event_back_btnActionPerformed
 
     public static void main(String args[]) {
