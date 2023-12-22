@@ -23,7 +23,6 @@ public class AddTrainer extends javax.swing.JFrame {
      * Creates new form AddTrainer
      */
     public AddTrainer() {
-
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -162,7 +161,7 @@ public class AddTrainer extends javax.swing.JFrame {
 
         phone_txt.setText(" ");
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Members/assets/dumbell (1).jpeg"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/dumbell (1).jpeg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

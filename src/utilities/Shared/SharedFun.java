@@ -15,8 +15,7 @@ import javax.swing.JFrame;
  */
 public class SharedFun {
     static public void navigateTo(Window source, JFrame Screen) {
-        WindowEvent closeWindow = new WindowEvent(source, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
+        source.dispose();
         Screen.setVisible(true);
     }
 }
