@@ -4,8 +4,11 @@
  */
 package Machines;
 
-import static Main.GymManagementSystem.con;
+import Home.HomeScreen;
+import static utilities.MySQLConnection.con;
 import entities.MachineModel;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static utilities.Constance.*;
+import utilities.SharedFun;
 
 /**
  *
@@ -25,21 +29,21 @@ public class AddMachines extends javax.swing.JFrame {
      * Creates new form gum2
      */
     public AddMachines() {
-        
+
         initComponents();
-         this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         setResizable(false);
         try {
-            PreparedStatement s = con.prepareStatement("select * from machines" );
+            PreparedStatement s = con.prepareStatement("select * from machines");
             ResultSet res = s.executeQuery();
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             while (res.next()) {
                 String sn = res.getString(1);
                 int name = res.getInt(2);
                 int trainingMusicale = res.getInt(3);
-                String tradeMark =  res.getString(4);
+                String tradeMark = res.getString(4);
                 int power = res.getInt(5);
-                model.addRow(new Object[]{machineName[name], sn, machineTrainingMusicale[trainingMusicale], tradeMark,  machinePower[power]});
+                model.addRow(new Object[]{machineName[name], sn, machineTrainingMusicale[trainingMusicale], tradeMark, machinePower[power]});
             }
         } catch (SQLException ex) {
             Logger.getLogger(AddMachines.class.getName()).log(Level.SEVERE, null, ex);
@@ -112,7 +116,12 @@ public class AddMachines extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 204));
-        jButton1.setText("Add");
+        jButton1.setText("back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Treadmill", "Elliptical", "Upright Bike", "Stair Mill", "Adjustable Dunbbell", "Kettlebel", "Spin Bike", "Leg Press Machine", "Standard Weight Plate", "Flat Bench" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -294,7 +303,8 @@ public class AddMachines extends javax.swing.JFrame {
             checkMachine(t.sn);
             isFound = true;
             JOptionPane.showMessageDialog(null, "this Serial Number currently used!");
-        } catch (SQLException ex) {}
+        } catch (SQLException ex) {
+        }
         if (!isFound) {
             try {
                 addMachine(t);
@@ -303,27 +313,34 @@ public class AddMachines extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-    
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        SharedFun.navigateTo(this, new HomeScreen());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+  
+
     private void checkMachine(String sn) throws SQLException {
-        PreparedStatement s = con.prepareStatement("select sn from machines where sn = " + "'" + sn + "'" );
+        PreparedStatement s = con.prepareStatement("select sn from machines where sn = " + "'" + sn + "'");
         ResultSet res = s.executeQuery();
         System.out.println("value is ");
         res.next();
         System.out.println(res.getInt(1));
     }
-    
+
     private void addMachine(MachineModel t) throws SQLException {
-            PreparedStatement stmt = con.prepareStatement("insert into machines(sn, name, training_musicale, trade_mark, power) values (?, ?, ?, ?, ?)");
-            stmt.setInt(1, Integer.parseInt(t.sn));
-            stmt.setInt(2,t.name);
-            stmt.setInt(3, t.trainingMusicale);
-            stmt.setString(4, t.tradeMark);
-            stmt.setInt(5, t.power);
-            stmt.executeUpdate();
-            System.out.println("added successfully");
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.addRow(new Object[]{machineName[t.name], t.sn, machineTrainingMusicale[t.trainingMusicale], t.tradeMark,  machinePower[t.power]});
+        PreparedStatement stmt = con.prepareStatement("insert into machines(sn, name, training_musicale, trade_mark, power) values (?, ?, ?, ?, ?)");
+        stmt.setInt(1, Integer.parseInt(t.sn));
+        stmt.setInt(2, t.name);
+        stmt.setInt(3, t.trainingMusicale);
+        stmt.setString(4, t.tradeMark);
+        stmt.setInt(5, t.power);
+        stmt.executeUpdate();
+        System.out.println("added successfully");
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.addRow(new Object[]{machineName[t.name], t.sn, machineTrainingMusicale[t.trainingMusicale], t.tradeMark, machinePower[t.power]});
     }
+
     /**
      * @param args the command line arguments
      */
@@ -383,5 +400,4 @@ public class AddMachines extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 
-   
 }

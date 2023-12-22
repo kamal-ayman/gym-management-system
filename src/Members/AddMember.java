@@ -1,6 +1,6 @@
 package Members;
 
-import static Main.GymManagementSystem.con;
+import Home.HomeScreen;
 import entities.MemberModel;
 import com.sun.tools.attach.AgentLoadException;
 import com.toedter.calendar.demo.DateChooserPanel;
@@ -21,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
 import static utilities.Constance.machineName;
 import static utilities.Constance.machinePower;
 import static utilities.Constance.machineTrainingMusicale;
+import static utilities.MySQLConnection.con;
+import utilities.SharedFun;
 
 public class AddMember extends javax.swing.JFrame {
 
@@ -152,6 +154,11 @@ public class AddMember extends javax.swing.JFrame {
         back_btn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         back_btn.setForeground(new java.awt.Color(0, 0, 204));
         back_btn.setText("back");
+        back_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back_btnActionPerformed(evt);
+            }
+        });
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/dumbell.jpeg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -408,9 +415,7 @@ public class AddMember extends javax.swing.JFrame {
         System.out.println("added successfully");
     }
     private void Members_btn(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Members_btn
-        close();
-        Members member = new Members();
-        member.setVisible(true);
+        SharedFun.navigateTo(this, new Members());
     }//GEN-LAST:event_Members_btn
 
     private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
@@ -424,10 +429,10 @@ public class AddMember extends javax.swing.JFrame {
     private void priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_priceActionPerformed
-    public void close() {
-        WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
-    }
+
+    private void back_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_btnActionPerformed
+        SharedFun.navigateTo(this, new HomeScreen());      
+    }//GEN-LAST:event_back_btnActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

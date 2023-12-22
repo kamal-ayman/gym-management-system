@@ -15,6 +15,7 @@ public class Trainers extends javax.swing.JFrame {
      */
     public Trainers() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

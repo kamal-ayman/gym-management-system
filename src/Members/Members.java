@@ -5,7 +5,7 @@
 package Members;
 
 import Machines.AddMachines;
-import static Main.GymManagementSystem.con;
+import static utilities.MySQLConnection.con;
 import entities.MemberModel;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -20,6 +20,7 @@ import static utilities.Constance.machineName;
 import static utilities.Constance.machinePower;
 import static utilities.Constance.machineTrainingMusicale;
 import static utilities.Constance.memberPrice;
+import utilities.SharedFun;
 
 /**
  *
@@ -33,8 +34,8 @@ public class Members extends javax.swing.JFrame {
     public Members() {
         initComponents();
         this.setLocationRelativeTo(null);
-         try {
-            PreparedStatement s = con.prepareStatement("select * from member" );
+        try {
+            PreparedStatement s = con.prepareStatement("select * from member");
             ResultSet res = s.executeQuery();
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             // id, name, gender, age, phone, email, sub_type, sub_price, reg_st, reg_ed
@@ -50,13 +51,16 @@ public class Members extends javax.swing.JFrame {
                 Date from, to;
                 from = res.getDate(9);
                 to = res.getDate(10);
-                model.addRow(new Object[]{id, name, isMale == 1? "male" : "female", age, phone, email, isPublic == 1? "Public coach" : "Private coach", memberPrice[price], from ,to});
+                model.addRow(new Object[]{id, name, isMale == 1 ? "male" : "female", age, phone, email, isPublic == 1 ? "Public coach" : "Private coach", memberPrice[price], from, to});
             }
         } catch (SQLException ex) {
             Logger.getLogger(AddMachines.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public Members(MemberModel model){}
+
+    public Members(MemberModel model) {
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -247,15 +251,9 @@ public class Members extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- public void close() {
-        WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
-    }
     private void GoBack(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBack
         // TODO add your handling code here: 
-        close();
-        AddMember newMember = new AddMember();
-        newMember.setVisible(true);
+        SharedFun.navigateTo(this, new AddMember());
     }//GEN-LAST:event_GoBack
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -269,22 +267,21 @@ public class Members extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String[] searchType = {
             "id",
-            "phone",
-        };
+            "phone",};
         int c = jComboBox1.getSelectedIndex();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String searchText = jTextField1.getText();
         if (searchText.isEmpty()) {
             return;
         }
-         try {
-            PreparedStatement s = con.prepareStatement("select * from member where " + searchType[c]+ " = ?");
+        try {
+            PreparedStatement s = con.prepareStatement("select * from member where " + searchType[c] + " = ?");
             s.setInt(1, Integer.parseInt(searchText));
             ResultSet res = s.executeQuery();
             while (model.getRowCount() > 0) {
                 model.removeRow(0);
             }
-             System.out.println("start");
+            System.out.println("start");
             // id, name, gender, age, phone, email, sub_type, sub_price, reg_st, reg_ed
             while (res.next()) {
                 int id = res.getInt(1);
@@ -298,20 +295,20 @@ public class Members extends javax.swing.JFrame {
                 Date from, to;
                 from = res.getDate(9);
                 to = res.getDate(10);
-                model.addRow(new Object[]{id, name, isMale == 1? "male" : "female", age, phone, email, isPublic == 1? "Public coach" : "Private coach", memberPrice[price], from ,to});
+                model.addRow(new Object[]{id, name, isMale == 1 ? "male" : "female", age, phone, email, isPublic == 1 ? "Public coach" : "Private coach", memberPrice[price], from, to});
             }
         } catch (SQLException ex) {
             Logger.getLogger(AddMachines.class.getName()).log(Level.SEVERE, null, ex);
         }        // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         jTextField1.setText("");
-        
-         try {
-            PreparedStatement s = con.prepareStatement("select * from member" );
+
+        try {
+            PreparedStatement s = con.prepareStatement("select * from member");
             ResultSet res = s.executeQuery();
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             while (model.getRowCount() > 0) {
@@ -330,7 +327,7 @@ public class Members extends javax.swing.JFrame {
                 Date from, to;
                 from = res.getDate(9);
                 to = res.getDate(10);
-                model.addRow(new Object[]{id, name, isMale == 1? "male" : "female", age, phone, email, isPublic == 1? "Public coach" : "Private coach", memberPrice[price], from ,to});
+                model.addRow(new Object[]{id, name, isMale == 1 ? "male" : "female", age, phone, email, isPublic == 1 ? "Public coach" : "Private coach", memberPrice[price], from, to});
             }
         } catch (SQLException ex) {
             Logger.getLogger(AddMachines.class.getName()).log(Level.SEVERE, null, ex);

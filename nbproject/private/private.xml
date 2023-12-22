@@ -5,9 +5,11 @@
         <group>
             <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Home/HomeScreen.java</file>
             <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Members/AddMember.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/entities/MachineModel.java</file>
             <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Admin/Admin.java</file>
             <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Admin/ResetPassword.java</file>
             <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Main/GymManagementSystem.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/entities/AdminModel.java</file>
             <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Admin/GMS.java</file>
             <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Machines/AddMachines.java</file>
             <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Trainers/AddTrainer.java</file>
@@ -16,6 +18,7 @@
             <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/entities/MemberModel.java</file>
             <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Trainers/Trainers.java</file>
             <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Admin/AddAdmin.java</file>
+            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/entities/TrainerModel.java</file>
         </group>
     </open-files>
 </project-private>

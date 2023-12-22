@@ -15,9 +15,11 @@ public class Constance {
         "Level 3",
         "Level 4",
         "Level 5 with RSPH",};
+    
     public static String[] workTime = {
         "AM",
         "PM",};
+    
     public static String[] machineName = {
         "Treadmill",
         "Elliptical",
@@ -29,6 +31,7 @@ public class Constance {
         "Leg Press Machine",
         "Standard Weight Plate",
         "Flat Bench",};
+    
     public static String[] machineTrainingMusicale = {
         "Hand Muscles",
         "Calf Muscles",
@@ -39,10 +42,12 @@ public class Constance {
         "The Back Muscles",
         "Chest Musscles",
         "Lower Body Muscles",};
+    
     public static String[] machinePower = {
         "High",
         "Middle",
         "Low",};
+    
     public static int[] memberPrice = {
         120,
         150,

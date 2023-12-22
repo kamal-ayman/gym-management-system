@@ -4,16 +4,14 @@
  */
 package Admin;
 
+import Layout.GMS;
 import entities.AdminModel;
-import static Main.GymManagementSystem.con;
-import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
+import static utilities.MySQLConnection.con;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import utilities.SharedFun;
 
 /**
  *
@@ -231,26 +229,31 @@ public class AddAdmin extends javax.swing.JFrame {
     private void Valid_or_No(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Valid_or_No
         boolean isFound = false;
 
-        String Name=TXT_NAME.getText();
-        String Phone=TXT_PHONE.getText();
-        String Address=TXT_ADDRESS.getText();
-        String ID=TXT_ID.getText();
-        String Password1=TXT_Password.getText();
-        String Password2=TXT_Confirm.getText();
+        String Name = TXT_NAME.getText();
+        String Phone = TXT_PHONE.getText();
+        String Address = TXT_ADDRESS.getText();
+        String ID = TXT_ID.getText();
+        String Password1 = TXT_Password.getText();
+        String Password2 = TXT_Confirm.getText();
+        if (!Password1.equals(Password2)) {
+            JOptionPane.showMessageDialog(null, "incorrect password!");
+            return;
+        }
         AdminModel admin = new AdminModel(Name, ID, Phone, Password1, Address);
         try {
             checkAdmin(Integer.parseInt(ID));
             isFound = true;
             JOptionPane.showMessageDialog(null, "this id currently used!");
-        } catch (SQLException ex) {}
+        } catch (SQLException ex) {
+        }
         if (!isFound) {
             try {
                 addAdmin(admin);
             } catch (SQLException ex) {
                 System.out.println("error add");
-            }    
+            }
         }
-        
+
 //        boolean F1,F2,F3,F4,F5,F6;
 //        F1=F2=F3=F4=F5=F6=true;
 //        for(int i=0;i<Name.length();i++){
@@ -295,16 +298,17 @@ public class AddAdmin extends javax.swing.JFrame {
 //        }else{
 //         JOptionPane.showMessageDialog(this,"Data Of New Admin is Not valid","Failed",0);
 //        }
-       
+
     }//GEN-LAST:event_Valid_or_No
-    private void checkAdmin(int id) throws SQLException{
-        PreparedStatement s = con.prepareStatement("select id from admin where id = " + "'" + id + "'" );
+    private void checkAdmin(int id) throws SQLException {
+        PreparedStatement s = con.prepareStatement("select id from admin where id = " + "'" + id + "'");
         ResultSet res = s.executeQuery();
         System.out.println("value is ");
         res.next();
         System.out.println(res.getInt(1));
     }
-    private void addAdmin(AdminModel a) throws SQLException{
+
+    private void addAdmin(AdminModel a) throws SQLException {
         PreparedStatement stmt = con.prepareStatement("insert into admin(id, name, phone, address, password) values (?, ?, ?, ?, ?)");
         stmt.setInt(1, Integer.parseInt(a.id));
         stmt.setString(2, a.name);
@@ -317,15 +321,9 @@ public class AddAdmin extends javax.swing.JFrame {
         System.out.println("added successfully");
     }
 
-    public void  close() {
-        WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
-    }
     private void Back_btn(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_btn
         // TODO add your handling code here:
-        close();
-        GMS home =new GMS();
-        home.setVisible(true);
+        SharedFun.navigateTo(this, new GMS());
     }//GEN-LAST:event_Back_btn
 
     /**

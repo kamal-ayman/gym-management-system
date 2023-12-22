@@ -6,13 +6,14 @@ package Trainers;
 
 import Home.HomeScreen;
 import entities.TrainerModel;
-import static Main.GymManagementSystem.con;
+import static utilities.MySQLConnection.con;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import utilities.SharedFun;
 
 /**
  *
@@ -24,14 +25,11 @@ public class AddTrainer extends javax.swing.JFrame {
      * Creates new form AddTrainer
      */
     public AddTrainer() {
-        
+
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    public void  close() {
-        WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -313,7 +311,7 @@ public class AddTrainer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       TrainerModel t = new TrainerModel(f_name_txt.getText(), l_name_txt.getText(), jRadioButton1.isSelected(), phone_txt.getText(), jComboBox1.getSelectedIndex(), jSpinner1.getValue().toString(), jComboBox2.getSelectedIndex(), jTextField2.getText(), jTextField3.getText());
+        TrainerModel t = new TrainerModel(f_name_txt.getText(), l_name_txt.getText(), jRadioButton1.isSelected(), phone_txt.getText(), jComboBox1.getSelectedIndex(), jSpinner1.getValue().toString(), jComboBox2.getSelectedIndex(), jTextField2.getText(), jTextField3.getText());
         boolean isFound = false;
         if (t.id.isEmpty() || t.firstName.isEmpty() || t.lastName.isEmpty() || t.phoneNumber.isEmpty() || t.email.isEmpty()) {
             JOptionPane.showMessageDialog(null, "please complete your data...!");
@@ -323,7 +321,8 @@ public class AddTrainer extends javax.swing.JFrame {
             checkTrainers(t.id);
             isFound = true;
             JOptionPane.showMessageDialog(null, "this id currently used!");
-        } catch (SQLException ex) {}
+        } catch (SQLException ex) {
+        }
         if (!isFound) {
             try {
                 addTrainers(t);
@@ -335,54 +334,33 @@ public class AddTrainer extends javax.swing.JFrame {
 //         model.addRow(new Object[]{t.firstName + " " + t.lastName, t.isMale? "Male":"Female",  t.phoneNumber, experience[t.experience],  t.age, workTime[t.workTime], t.email, t.id});
     }//GEN-LAST:event_jButton2ActionPerformed
 
-        private void checkTrainers(String id) throws SQLException{
-        PreparedStatement s = con.prepareStatement("select id from trainers where id = " + "'" + id + "'" );
+    private void checkTrainers(String id) throws SQLException {
+        PreparedStatement s = con.prepareStatement("select id from trainers where id = " + "'" + id + "'");
         ResultSet res = s.executeQuery();
         System.out.println("value is ");
         res.next();
         System.out.println(res.getInt(1));
     }
-    
-    private void addTrainers(TrainerModel t) throws SQLException{
-            PreparedStatement stmt = con.prepareStatement("insert into trainers(id, fname, lname, phone, gender, experience, age, work_time, email) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            stmt.setInt(1, Integer.parseInt(t.id));
-            stmt.setString(2, t.firstName);
-            stmt.setString(3, t.lastName);
-            stmt.setString(4, t.phoneNumber);
-            stmt.setInt(5, t.isMale ? 1 : 0);
-            stmt.setInt(6, t.experience);
-            stmt.setInt(7,Integer.parseInt( t.age));
-            stmt.setInt(8, t.workTime);
-            stmt.setString(9, t.email);
-            stmt.executeUpdate();
-            System.out.println("added successfully");
-//            stmt.executeQuery();
-            
-//            
-//            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-//
-//            String[] experiance = {
-//                "Level 2",
-//                "Level 3",
-//                "Level 4",
-//                "Level 5 with RSPH",
-//            };
-//            String[] workTime = {
-//              "AM",
-//              "PM",
-//            };
-//        
-//            
-//            model.addRow(new Object[]{t.firstName + " " + t.lastName, t.isMale? "Male":"Female",  t.phoneNumber, experiance[t.experience],  t.age, workTime[t.workTime], t.email, t.id});
 
+    private void addTrainers(TrainerModel t) throws SQLException {
+        PreparedStatement stmt = con.prepareStatement("insert into trainers(id, fname, lname, phone, gender, experience, age, work_time, email) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        stmt.setInt(1, Integer.parseInt(t.id));
+        stmt.setString(2, t.firstName);
+        stmt.setString(3, t.lastName);
+        stmt.setString(4, t.phoneNumber);
+        stmt.setInt(5, t.isMale ? 1 : 0);
+        stmt.setInt(6, t.experience);
+        stmt.setInt(7, Integer.parseInt(t.age));
+        stmt.setInt(8, t.workTime);
+        stmt.setString(9, t.email);
+        stmt.executeUpdate();
+        System.out.println("added successfully");
     }
 
-    
+
     private void back_btn(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_btn
         // TODO add your handling code here:
-        close();
-        HomeScreen home=new HomeScreen();
-        home.setVisible(true);
+        SharedFun.navigateTo(this, new HomeScreen());
     }//GEN-LAST:event_back_btn
 
     private void f_name_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_f_name_txtActionPerformed
@@ -453,4 +431,4 @@ public class AddTrainer extends javax.swing.JFrame {
     private javax.swing.JTextField l_name_txt;
     private javax.swing.JTextField phone_txt;
     // End of variables declaration//GEN-END:variables
-   }
+}
