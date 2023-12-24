@@ -4,6 +4,12 @@
  */
 package Admin;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static utilities.Network.MySQLConnection.con;
 import utilities.Shared.SharedFun;
 
 /**
@@ -19,8 +25,7 @@ public class ResetPassword extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -227,11 +232,25 @@ public class ResetPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        int id = Integer.parseInt(jTextField1.getText());
-        String pass, cpass;
-        pass = jTextField2.getText();
-        cpass = jTextField3.getText();
+        try {
+            // TODO add your handling code here:
+            int id = Integer.parseInt(jTextField1.getText());
+            String pass, cpass;
+            pass = jTextField2.getText();
+            cpass = jTextField3.getText();
+            PreparedStatement update = con.prepareStatement("UPDATE admin SET password = ? WHERE id = ?");
+            update.setString(1, pass);
+            update.setInt(2, id);
+            if (update.executeUpdate() == 0) {
+                JOptionPane.showMessageDialog(null, "id not found...!");
+            } else {
+                JOptionPane.showMessageDialog(null, "password updated...!");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "id not found...!");
+            Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -242,7 +261,7 @@ public class ResetPassword extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

@@ -32,7 +32,7 @@ public class AdminInformation extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         jLabel5.setText(Global.adminModel.name);
         jLabel6.setText(Global.adminModel.phone);
-        if (Global.adminModel.address.isEmpty()) {
+        if ("".equals(Global.adminModel.address)) {
             jLabel7.setText("empty value...!");
         } else {
             jLabel7.setText(Global.adminModel.address);
