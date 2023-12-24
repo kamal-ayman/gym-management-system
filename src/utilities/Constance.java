@@ -4,10 +4,13 @@
  */
 package utilities;
 
+import entities.AdminModel;
+
 /**
  *
  * @author kamal
  */
+
 public class Constance {
 
     public static String[] experiance = {

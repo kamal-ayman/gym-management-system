@@ -8,9 +8,10 @@ package entities;
 
 public class AdminModel {
 
-    public String name, phone, password, id, address;
+    public String name, phone, password, address;
+    public int id;
     
-    public AdminModel(String name, String id, String phone, String password, String address) {
+    public AdminModel(String name, int id, String phone, String password, String address) {
         this.name = name;
         this.phone = phone;
         this.password = password;

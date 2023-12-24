@@ -1,3 +1,8 @@
+CREATE TABLE login_cache (
+    id BIGINT PRIMARY KEY,
+    is_login BOOLEAN NOT NULL
+);
+
 CREATE TABLE admin (
     id BIGINT PRIMARY KEY,
     name TEXT NULL,
@@ -5,7 +10,7 @@ CREATE TABLE admin (
     address TEXT NULL,
     password TEXT NULL
 );
-  
+
   CREATE TABLE trainers (
     id BIGINT PRIMARY KEY,
     fname TEXT NOT NULL,
@@ -26,9 +31,9 @@ CREATE TABLE admin (
     phone TEXT NULL,
     email TEXT NULL,
     sub_type INT NULL,
-    sub_price DOUBLE PRECISION NULL,
-    reg_st TEXT NULL,
-    reg_ed TEXT NULL
+    sub_price INT NULL,
+    reg_st DATE NULL,
+    reg_ed DATE NULL
 );
 
 CREATE TABLE machines (

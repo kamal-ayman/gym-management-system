@@ -1,11 +1,15 @@
 package Main;
 
-import utilities.Network.MySQLConnection;
+import Home.HomeScreen;
+import static entities.global.Global.mySQLConnection;
 
 public class GymManagementSystem {
 
     public static void main(String[] args) {
-        new MySQLConnection();
-        new Layout.GMS().setVisible(true);
+        if (mySQLConnection.InitMySQLConnection() && mySQLConnection.isLoginFun()) {
+            new HomeScreen().setVisible(true);
+        } else {
+            new Layout.GMS().setVisible(true);
+        }
     }
-}
+}   

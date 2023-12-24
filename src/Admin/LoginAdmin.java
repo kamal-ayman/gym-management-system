@@ -7,6 +7,7 @@ package Admin;
 import Layout.GMS;
 import Home.HomeScreen;
 import Machines.AddMachines;
+import entities.global.Global;
 import static utilities.Network.MySQLConnection.con;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,12 +21,12 @@ import utilities.Shared.SharedFun;
  *
  * @author abdo
  */
-public class Admin extends javax.swing.JFrame {
+public class LoginAdmin extends javax.swing.JFrame {
 
     /**
      * Creates new form GYM1
      */
-    public Admin() {
+    public LoginAdmin() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -207,26 +208,23 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         // SELECT * FROM gms.admin where name = "ff" and  password = 12;
         boolean isFound = false;
+        int userId = -1;
         try {
             PreparedStatement s = con.prepareStatement("SELECT * FROM gms.admin where name = ? and password = ?");
             s.setString(1, TXT_UserName.getText());
             s.setString(2, TXT_Password.getText());
             ResultSet res = s.executeQuery();
             isFound = res.next();
-
+            userId = res.getInt(1);
         } catch (SQLException ex) {
             Logger.getLogger(AddMachines.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (isFound) {
+            Global.mySQLConnection.updateLoginCache(userId);
             SharedFun.navigateTo(this, new HomeScreen());
         } else {
             JOptionPane.showMessageDialog(null, "incorrect username or password...!");
         }
-//        if (TXT_UserName.getText()=="Abdo"&&TXT_Password.getText()=="1234") {
-
-//        } else {
-//            JOptionPane.showMessageDialog(this, "UserName or Password is Wrong!", "Failed", 0);
-//        }
     }//GEN-LAST:event_btn_loginActionPerformed
 
     private void TXT_UserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_UserNameActionPerformed
@@ -259,21 +257,23 @@ public class Admin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Admin().setVisible(true);
+                new LoginAdmin().setVisible(true);
             }
         });
     }

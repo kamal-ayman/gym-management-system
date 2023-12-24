@@ -239,7 +239,7 @@ public class AddAdmin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "incorrect password!");
             return;
         }
-        AdminModel admin = new AdminModel(Name, ID, Phone, Password1, Address);
+        AdminModel admin = new AdminModel(Name, Integer.parseInt(ID), Phone, Password1, Address);
         try {
             checkAdmin(Integer.parseInt(ID));
             isFound = true;
@@ -310,7 +310,7 @@ public class AddAdmin extends javax.swing.JFrame {
 
     private void addAdmin(AdminModel a) throws SQLException {
         PreparedStatement stmt = con.prepareStatement("insert into admin(id, name, phone, address, password) values (?, ?, ?, ?, ?)");
-        stmt.setInt(1, Integer.parseInt(a.id));
+        stmt.setInt(1, a.id);
         stmt.setString(2, a.name);
         stmt.setString(3, a.phone);
         stmt.setString(4, a.address);
@@ -318,9 +318,18 @@ public class AddAdmin extends javax.swing.JFrame {
         System.out.println(a.address);
         stmt.setString(5, a.password);
         stmt.executeUpdate();
-        System.out.println("added successfully");
+        clearData();
     }
 
+    private void clearData() {
+        TXT_NAME.setText("");
+        TXT_PHONE.setText("");
+        TXT_ADDRESS.setText("");
+        TXT_ID.setText("");
+        TXT_Password.setText("");
+        TXT_Confirm.setText("");
+        System.out.println("added successfully");
+    }
     private void Back_btn(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_btn
         // TODO add your handling code here:
         SharedFun.navigateTo(this, new GMS());

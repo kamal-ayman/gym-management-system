@@ -5,7 +5,7 @@
 package Layout;
 
 import Admin.AddAdmin;
-import Admin.Admin;
+import Admin.LoginAdmin;
 import utilities.Shared.SharedFun;
 
 public class GMS extends javax.swing.JFrame {
@@ -29,14 +29,16 @@ public class GMS extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -70,7 +72,7 @@ public class GMS extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 204));
-        jButton1.setText("Admin");
+        jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Admin_btn(evt);
@@ -79,7 +81,7 @@ public class GMS extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 204));
-        jButton3.setText("Add Admin");
+        jButton3.setText("SignUp");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddAdmin_btn(evt);
@@ -176,7 +178,7 @@ public class GMS extends javax.swing.JFrame {
 
     private void Admin_btn(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_btn
         // TODO add your handling code here:
-        SharedFun.navigateTo(this, new Admin());
+        SharedFun.navigateTo(this, new LoginAdmin());
     }//GEN-LAST:event_Admin_btn
 
     private void AddAdmin_btn(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAdmin_btn
