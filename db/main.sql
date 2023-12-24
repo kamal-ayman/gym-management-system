@@ -2,6 +2,8 @@ CREATE TABLE login_cache (
     id BIGINT PRIMARY KEY,
     is_login BOOLEAN NOT NULL
 );
+INSERT INTO login_cache (id, is_login) values (0, 0);
+
 
 CREATE TABLE admin (
     id BIGINT PRIMARY KEY,
@@ -43,3 +45,5 @@ CREATE TABLE machines (
     trade_mark TEXT NOT NULL,
     power INT NOT NULL
 );
+
+
