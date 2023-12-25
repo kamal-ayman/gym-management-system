@@ -104,7 +104,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="118" max="32767" attributes="0"/>
                                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel1" min="-2" pref="304" max="-2" attributes="0"/>
@@ -121,6 +121,8 @@
                                   <Component id="jButton3" min="-2" pref="92" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jButton4" min="-2" pref="92" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jButton5" min="-2" pref="92" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -138,8 +140,9 @@
                               <Component id="jTextField1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="jButton3" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                               <Component id="jButton4" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="jButton5" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="394" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -171,9 +174,10 @@
                     <Component class="javax.swing.JTable" name="jTable1">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="10" rowCount="0">
+                          <Table columnCount="11" rowCount="0">
                             <Column editable="true" title="id" type="java.lang.Object"/>
                             <Column editable="true" title="name" type="java.lang.Object"/>
+                            <Column editable="true" title="Trainer Name" type="java.lang.Object"/>
                             <Column editable="true" title="gender" type="java.lang.Object"/>
                             <Column editable="true" title="age" type="java.lang.Object"/>
                             <Column editable="true" title="phone" type="java.lang.Object"/>
@@ -184,8 +188,14 @@
                             <Column editable="true" title="reg_ed" type="java.lang.Object"/>
                           </Table>
                         </Property>
+                        <Property name="toolTipText" type="java.lang.String" value=""/>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
@@ -329,6 +339,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jButton5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Delete"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

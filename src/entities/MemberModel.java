@@ -3,15 +3,15 @@ package entities;
 
 import java.util.Date;
 
-
 public class MemberModel {
 
-    public String name, phoneNumber, age, email, id;
-    public boolean isMale,isPublic;
-    public int price;
+    public String name, phoneNumber, age, email, id, trainerName;
+    public boolean isMale, isPublic;
+    public Integer price, trainer_id;
     public Date from, to;
+    
 
-    public MemberModel(String name, String id, boolean isMale,  String age,String phone, String email, boolean isPublic, int price,Date from, Date to) {
+    public MemberModel(String name, String id, boolean isMale, String age, String phone, String email, boolean isPublic, int price, Date from, Date to, Integer trainer_id, String trainerName) {
         this.name = name;
         this.isMale = isMale;
         this.phoneNumber = phone;
@@ -23,5 +23,7 @@ public class MemberModel {
         this.to = to;
         this.isPublic = isPublic;
         this.price = price;
+        this.trainer_id = trainer_id;
+        this.trainerName = trainerName;
     }
 }

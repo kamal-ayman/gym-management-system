@@ -28,27 +28,7 @@ public class Trainers extends javax.swing.JFrame {
     public Trainers() {
         initComponents();
         this.setLocationRelativeTo(null);
-        try {
-            PreparedStatement s = con.prepareStatement("select * from trainers");
-            ResultSet res = s.executeQuery();
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            // id, name, gender, age, phone, email, sub_type, sub_price, reg_st, reg_ed
-            while (res.next()) {
-                int id = res.getInt(1);
-                String fname = res.getString(2);
-                String lname = res.getString(3);
-                String phone = res.getString(4);
-                boolean isMale = res.getInt(5) == 1;
-                int exp = res.getInt(6);
-                int age = res.getInt(7);
-                int wt = res.getInt(8);
-                String email = res.getString(9);
-                model.addRow(new Object[]{id, fname + " " + lname, phone, isMale ? "male" : "female", Constance.experiance[exp], age, workTime[wt], email});
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(AddMachines.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        SharedFun.resetTableTrainers(jTable1);
     }
 
     /**
@@ -73,6 +53,7 @@ public class Trainers extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,21 +68,14 @@ public class Trainers extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", "name", "phone", "gender", "Experince", "age", "Work Time", "email", "sub_type", "sub_price", "reg_st", "reg_ed"
+                "id", "name", "phone", "gender", "Experince", "age", "Work Time", "email"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(8).setHeaderValue("sub_type");
-            jTable1.getColumnModel().getColumn(9).setHeaderValue("sub_price");
-            jTable1.getColumnModel().getColumn(10).setHeaderValue("reg_st");
-            jTable1.getColumnModel().getColumn(11).setHeaderValue("reg_ed");
-        }
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 204));
         jButton1.setText("add Trainers");
-        jButton1.setActionCommand("add Trainers");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1GoBack(evt);
@@ -153,6 +127,14 @@ public class Trainers extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("Delete");
+        jButton5.setActionCommand("Delete");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -178,7 +160,9 @@ public class Trainers extends javax.swing.JFrame {
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 33, Short.MAX_VALUE)))
                 .addGap(24, 24, 24))
         );
         jPanel3Layout.setVerticalGroup(
@@ -190,7 +174,8 @@ public class Trainers extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -273,9 +258,7 @@ public class Trainers extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String[] searchType = {
-            "id",
-            "phone",};
+        if (!SharedFun.checkSearchText(jTextField1)) return;
         int c = jComboBox1.getSelectedIndex();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String searchText = jTextField1.getText();
@@ -283,7 +266,7 @@ public class Trainers extends javax.swing.JFrame {
             return;
         }
         try {
-            PreparedStatement s = con.prepareStatement("select * from trainers where " + searchType[c] + " = ?");
+            PreparedStatement s = con.prepareStatement("select * from trainers where " + Constance.searchType[c] + " = ?");
             s.setInt(1, Integer.parseInt(searchText));
             ResultSet res = s.executeQuery();
             while (model.getRowCount() > 0) {
@@ -311,32 +294,23 @@ public class Trainers extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         jTextField1.setText("");
-
-        try {
-            PreparedStatement s = con.prepareStatement("select * from trainers");
-            ResultSet res = s.executeQuery();
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            while (model.getRowCount() > 0) {
-                model.removeRow(0);
-            }
-            // id, name, gender, age, phone, email, sub_type, sub_price, reg_st, reg_ed
-            while (res.next()) {
-                int id = res.getInt(1);
-                String fname = res.getString(2);
-                String lname = res.getString(3);
-                String phone = res.getString(4);
-                boolean isMale = res.getInt(5) == 1;
-                int exp = res.getInt(6);
-                int age = res.getInt(7);
-                int wt = res.getInt(8);
-                String email = res.getString(9);
-                model.addRow(new Object[]{id, fname + " " + lname, phone, isMale ? "male" : "female", Constance.experiance[exp], age, workTime[wt], email});
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
+        SharedFun.resetTableTrainers(jTable1);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if (!SharedFun.checkSearchText(jTextField1)) return;
+        try {
+            jComboBox1.setSelectedIndex(0);
+            String id = jTextField1.getText();
+            
+            PreparedStatement s = con.prepareStatement("DELETE FROM trainers WHERE id = ?");
+            s.setString(1, id);
+            s.executeUpdate();
+            SharedFun.resetTableTrainers(jTable1);
+        } catch (SQLException ex) {
+            Logger.getLogger(Trainers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,6 +352,7 @@ public class Trainers extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

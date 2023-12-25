@@ -5,6 +5,9 @@
 package entities.global;
 
 import entities.AdminModel;
+import entities.MemberModel;
+import entities.TrainerModel;
+import java.util.ArrayList;
 import utilities.Network.MySQLConnection;
 
 /**
@@ -15,4 +18,6 @@ public class Global {
 
     static public MySQLConnection mySQLConnection = new MySQLConnection();
     static public AdminModel adminModel;
+    static public ArrayList<TrainerModel> trainersModel = new ArrayList<>();
+    static public ArrayList<MemberModel> memberModel = new ArrayList<>();
 }

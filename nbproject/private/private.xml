@@ -3,18 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/jar%20files/mysql-connector-j-8.1.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/LoadBalancedAutoCommitInterceptor.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Admin/LoginAdmin.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Admin/AdminInformation.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Home/HomeScreen.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Machines/AddMachines.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Admin/ResetPassword.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/jar%20files/mysql-connector-j-8.1.0/src/main/user-impl/java/com/mysql/cj/jdbc/result/UpdatableResultSet.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/utilities/Network/MySQLConnection.java</file>
             <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Main/GymManagementSystem.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/entities/MemberModel.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/src/Layout/GMS.java</file>
-            <file>file:/C:/Users/kamal/Downloads/gym-management-system/jar%20files/mysql-connector-j-8.1.0/src/main/user-impl/java/com/mysql/cj/jdbc/ClientPreparedStatement.java</file>
         </group>
     </open-files>
 </project-private>

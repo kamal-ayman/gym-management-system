@@ -352,9 +352,22 @@ public class AddTrainer extends javax.swing.JFrame {
         stmt.setString(9, t.email);
         stmt.executeUpdate();
         System.out.println("added successfully");
+        clearData();
     }
 
 
+    private void clearData() {
+      f_name_txt.setText("");
+      l_name_txt.setText("");
+      phone_txt.setText("");
+      jComboBox1.setSelectedIndex(0);
+      jComboBox2.setSelectedIndex(0);
+      jSpinner1.setValue(18);
+      jTextField2.setText("");
+      jTextField3.setText("");
+      buttonGroup1.clearSelection();
+    }
+    
     private void back_btn(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_btn
         // TODO add your handling code here:
         SharedFun.navigateTo(this, new HomeScreen());

@@ -6,6 +6,7 @@ package Admin;
 
 import Layout.GMS;
 import entities.AdminModel;
+import static entities.global.Global.mySQLConnection;
 import static utilities.Network.MySQLConnection.con;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -249,6 +250,8 @@ public class AddAdmin extends javax.swing.JFrame {
         if (!isFound) {
             try {
                 addAdmin(admin);
+                mySQLConnection.updateLoginCache(admin.id);
+                SharedFun.navigateTo(this, new Home.HomeScreen());
             } catch (SQLException ex) {
                 System.out.println("error add");
             }

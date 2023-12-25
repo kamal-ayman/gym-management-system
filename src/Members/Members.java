@@ -14,7 +14,9 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import utilities.Constance;
 import static utilities.Constance.memberPrice;
 import utilities.Shared.SharedFun;
 
@@ -30,31 +32,7 @@ public class Members extends javax.swing.JFrame {
     public Members() {
         initComponents();
         this.setLocationRelativeTo(null);
-        try {
-            PreparedStatement s = con.prepareStatement("select * from member");
-            ResultSet res = s.executeQuery();
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            // id, name, gender, age, phone, email, sub_type, sub_price, reg_st, reg_ed
-            while (res.next()) {
-                int id = res.getInt(1);
-                String name = res.getString(2);
-                int isMale = res.getInt(3);
-                int age = res.getInt(4);
-                String phone = res.getString(5);
-                String email = res.getString(6);
-                int isPublic = res.getInt(7);
-                int price = res.getInt(8);
-                Date from, to;
-                from = res.getDate(9);
-                to = res.getDate(10);
-                model.addRow(new Object[]{id, name, isMale == 1 ? "male" : "female", age, phone, email, isPublic == 1 ? "Public coach" : "Private coach", memberPrice[price], from, to});
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AddMachines.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public Members(MemberModel model) {
+        SharedFun.resetTableMember(jTable1);
     }
 
     /**
@@ -79,6 +57,7 @@ public class Members extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -93,9 +72,10 @@ public class Members extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", "name", "gender", "age", "phone", "email", "sub_type", "sub_price", "reg_st", "reg_ed"
+                "id", "name", "Trainer Name", "gender", "age", "phone", "email", "sub_type", "sub_price", "reg_st", "reg_ed"
             }
         ));
+        jTable1.setToolTipText("");
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -152,6 +132,13 @@ public class Members extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("Delete");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -161,7 +148,7 @@ public class Members extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 118, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,6 +164,8 @@ public class Members extends javax.swing.JFrame {
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(24, 24, 24))
         );
@@ -189,8 +178,9 @@ public class Members extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,9 +256,7 @@ public class Members extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String[] searchType = {
-            "id",
-            "phone",};
+        if (!SharedFun.checkSearchText(jTextField1)) return;
         int c = jComboBox1.getSelectedIndex();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String searchText = jTextField1.getText();
@@ -276,7 +264,7 @@ public class Members extends javax.swing.JFrame {
             return;
         }
         try {
-            PreparedStatement s = con.prepareStatement("select * from member where " + searchType[c] + " = ?");
+            PreparedStatement s = con.prepareStatement("select * from member where " + Constance.searchType[c] + " = ?");
             s.setInt(1, Integer.parseInt(searchText));
             ResultSet res = s.executeQuery();
             while (model.getRowCount() > 0) {
@@ -307,38 +295,29 @@ public class Members extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         jTextField1.setText("");
-
-        try {
-            PreparedStatement s = con.prepareStatement("select * from member");
-            ResultSet res = s.executeQuery();
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            while (model.getRowCount() > 0) {
-                model.removeRow(0);
-            }
-            // id, name, gender, age, phone, email, sub_type, sub_price, reg_st, reg_ed
-            while (res.next()) {
-                int id = res.getInt(1);
-                String name = res.getString(2);
-                int isMale = res.getInt(3);
-                int age = res.getInt(4);
-                String phone = res.getString(5);
-                String email = res.getString(6);
-                int isPublic = res.getInt(7);
-                int price = res.getInt(8);
-                Date from, to;
-                from = res.getDate(9);
-                to = res.getDate(10);
-                model.addRow(new Object[]{id, name, isMale == 1 ? "male" : "female", age, phone, email, isPublic == 1 ? "Public coach" : "Private coach", memberPrice[price], from, to});
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AddMachines.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        SharedFun.resetTableMember(jTable1);
     }//GEN-LAST:event_jButton4ActionPerformed
+
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         SharedFun.navigateTo(this, new HomeScreen());
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if (!SharedFun.checkSearchText(jTextField1)) return;
+        try {
+            jComboBox1.setSelectedIndex(0);
+            String id = jTextField1.getText();
+            SharedFun.checkMember(id);
+            PreparedStatement s = con.prepareStatement("DELETE FROM member WHERE id = ?");
+            s.setString(1, id);
+            s.executeUpdate();
+            SharedFun.resetTableMember(jTable1);
+        } catch (SQLException ex) {
+            Logger.getLogger(Members.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,6 +360,7 @@ public class Members extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
