@@ -1,9 +1,8 @@
 CREATE TABLE login_cache (
     id BIGINT PRIMARY KEY,
-    is_login BOOLEAN NOT NULL
+    is_login INT NOT NULL
 );
 INSERT INTO login_cache (id, is_login) values (0, 0);
-
 
 CREATE TABLE admin (
     id BIGINT PRIMARY KEY,
@@ -13,7 +12,7 @@ CREATE TABLE admin (
     password TEXT NULL
 );
 
-  CREATE TABLE trainers (
+CREATE TABLE trainers (
     id BIGINT PRIMARY KEY,
     fname TEXT NOT NULL,
     lname TEXT NOT NULL,
@@ -25,7 +24,7 @@ CREATE TABLE admin (
     email TEXT NOT NULL
 );
   
-  CREATE TABLE member (
+CREATE TABLE member (
     id BIGINT PRIMARY KEY,
     name TEXT NULL,
     gender INT NULL,
@@ -35,7 +34,8 @@ CREATE TABLE admin (
     sub_type INT NULL,
     sub_price INT NULL,
     reg_st DATE NULL,
-    reg_ed DATE NULL
+    reg_ed DATE NULL,
+    trainer_id bigint references trainers (id)
 );
 
 CREATE TABLE machines (
@@ -45,5 +45,3 @@ CREATE TABLE machines (
     trade_mark TEXT NOT NULL,
     power INT NOT NULL
 );
-
-
