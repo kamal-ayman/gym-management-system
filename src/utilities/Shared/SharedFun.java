@@ -50,7 +50,7 @@ public class SharedFun {
     static public void resetTableMember(JTable table) {
         try {
             Global.memberModel.clear();
-            PreparedStatement s = con.prepareStatement("SELECT member.*, trainers.fname, trainers.lname FROM member JOIN trainers");
+            PreparedStatement s = con.prepareStatement("SELECT m.*, t.fname, t.lname FROM member m JOIN trainers t ON m.trainer_id = t.id");
             ResultSet res = s.executeQuery();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             while (model.getRowCount() > 0) {
@@ -71,11 +71,13 @@ public class SharedFun {
                 Integer t_id = res.getInt(11);
                 String fname = res.getString(12);
                 String lname = res.getString(13);
-                MemberModel m = new MemberModel(name, String.valueOf(id), isMale == 1, String.valueOf(age), phone, email, isPublic == 1, price, from, to, t_id, fname + " " + lname);
+                MemberModel m = new MemberModel(name, String.valueOf(id), isMale == 1, String.valueOf(age), phone, email, isPublic == 1, price, from, to, t_id, fname == null ? "Public coach" : fname + " " + lname);
                 Global.memberModel.add(m);
+                System.out.println(m.id);
             }
             Global.memberModel.forEach(ele -> {
-                model.addRow(new Object[]{ele.id, ele.name, ele.trainer_id != 0 ? ele.trainerName : "Public coach", ele.isMale ? "male" : "female", ele.age, ele.phoneNumber, ele.email, ele.isPublic ? "Public coach" : "Private coach", memberPrice[ele.price], ele.from, ele.to});
+                
+                model.addRow(new Object[]{ele.id, ele.name, ele.trainerName, ele.isMale ? "male" : "female", ele.age, ele.phoneNumber, ele.email, ele.isPublic ? "Public coach" : "Private coach", memberPrice[ele.price], ele.from, ele.to});
             });
 
         } catch (SQLException ex) {

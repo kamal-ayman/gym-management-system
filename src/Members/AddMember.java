@@ -451,7 +451,7 @@ public class AddMember extends javax.swing.JFrame {
         t_name.removeAllItems();
         try {
 
-            PreparedStatement s = con.prepareStatement("select * from trainers");
+            PreparedStatement s = con.prepareStatement("select * from trainers where id != -1");
             ResultSet res = s.executeQuery();
             while (res.next()) {
                 TrainerModel t = new TrainerModel(res.getString(2), res.getString(3), res.getInt(5) == 1, res.getString(4), res.getInt(6), res.getString(7), res.getInt(8), res.getString(9), res.getString(1));
@@ -479,9 +479,8 @@ public class AddMember extends javax.swing.JFrame {
         stmt.setDate(9, from);
         to = new java.sql.Date(t.to.getTime());
         stmt.setDate(10, to);
-//        t.trainer_id == null
         if (t.trainer_id == null) {
-            stmt.setNull(11, java.sql.Types.INTEGER);
+            stmt.setInt(11, -1);
         } else {
             stmt.setInt(11, t.trainer_id);
         }

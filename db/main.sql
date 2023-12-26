@@ -24,6 +24,10 @@ CREATE TABLE trainers (
     email TEXT NOT NULL
 );
   
+
+INSERT INTO trainers (id) values (-1);
+
+
 CREATE TABLE member (
     id BIGINT PRIMARY KEY,
     name TEXT NULL,
