@@ -258,7 +258,8 @@ public class Trainers extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (!SharedFun.checkSearchText(jTextField1)) return;
+        if (!SharedFun.checkSearchText(jTextField1, jComboBox1.getSelectedIndex() == 0)) return;
+        
         int c = jComboBox1.getSelectedIndex();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String searchText = jTextField1.getText();
@@ -298,7 +299,7 @@ public class Trainers extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if (!SharedFun.checkSearchText(jTextField1)) return;
+        if (!SharedFun.checkSearchText(jTextField1, jComboBox1.getSelectedIndex() == 0)) return;
         try {
             jComboBox1.setSelectedIndex(0);
             String id = jTextField1.getText();

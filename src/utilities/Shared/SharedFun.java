@@ -76,7 +76,7 @@ public class SharedFun {
                 System.out.println(m.id);
             }
             Global.memberModel.forEach(ele -> {
-                
+
                 model.addRow(new Object[]{ele.id, ele.name, ele.trainerName, ele.isMale ? "male" : "female", ele.age, ele.phoneNumber, ele.email, ele.isPublic ? "Public coach" : "Private coach", memberPrice[ele.price], ele.from, ele.to});
             });
 
@@ -87,7 +87,7 @@ public class SharedFun {
 
     static public void resetTableTrainers(JTable table) {
         try {
-            PreparedStatement s = con.prepareStatement("select * from trainers");
+            PreparedStatement s = con.prepareStatement("select * from trainers where id != -1");
             ResultSet res = s.executeQuery();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             while (model.getRowCount() > 0) {
@@ -110,10 +110,24 @@ public class SharedFun {
             Logger.getLogger(AddMachines.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    static public boolean checkSearchText(JTextField text){
+
+    static public boolean checkSearchText(JTextField text, boolean isId) {
         if (text.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "please enter search text!");
             return false;
+        }
+        if (isId) {
+            int id = -1;
+            try {
+                id = Integer.parseInt(text.getText());
+                if (id < 0) {
+                    JOptionPane.showMessageDialog(null, "please enter correct id!");
+                    return false;
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "please enter correct id!");
+                return false;
+            }
         }
         return true;
     }
