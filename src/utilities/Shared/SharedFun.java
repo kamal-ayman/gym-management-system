@@ -8,6 +8,7 @@ import Machines.AddMachines;
 import entities.MemberModel;
 import entities.TrainerModel;
 import entities.global.Global;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.WindowEvent;
@@ -116,19 +117,19 @@ public class SharedFun {
             JOptionPane.showMessageDialog(null, "please enter search text!");
             return false;
         }
-        if (isId) {
-            int id = -1;
-            try {
-                id = Integer.parseInt(text.getText());
-                if (id < 0) {
-                    JOptionPane.showMessageDialog(null, "please enter correct id!");
-                    return false;
-                }
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "please enter correct id!");
+        int num = -1;
+        try {
+            num = Integer.parseInt(text.getText());
+            if (num < 0) {
+                JOptionPane.showMessageDialog(null, "please enter correct " + (isId ? "id" :"phone number") +" !");
                 return false;
             }
+        } catch (NumberFormatException c) {
+            JOptionPane.showMessageDialog(null, "please enter correct " + (isId ? "id" :"phone number") +" !");
+            System.out.println(c.toString());
+            return false;
         }
+
         return true;
     }
 }

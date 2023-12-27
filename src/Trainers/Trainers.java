@@ -263,9 +263,6 @@ public class Trainers extends javax.swing.JFrame {
         int c = jComboBox1.getSelectedIndex();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String searchText = jTextField1.getText();
-        if (searchText.isEmpty()) {
-            return;
-        }
         try {
             PreparedStatement s = con.prepareStatement("select * from trainers where " + Constance.searchType[c] + " = ?");
             s.setInt(1, Integer.parseInt(searchText));
