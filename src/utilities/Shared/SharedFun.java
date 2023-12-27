@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -48,8 +49,10 @@ public class SharedFun {
 
     }
 
-    static public void resetTableMember(JTable table) {
+    static public void resetTableMember(JTable table, JLabel total) {
         try {
+            total.setText("0");
+            int tot = 0;
             Global.memberModel.clear();
             PreparedStatement s = con.prepareStatement("SELECT m.*, t.fname, t.lname FROM member m JOIN trainers t ON m.trainer_id = t.id");
             ResultSet res = s.executeQuery();
@@ -74,10 +77,10 @@ public class SharedFun {
                 String lname = res.getString(13);
                 MemberModel m = new MemberModel(name, String.valueOf(id), isMale == 1, String.valueOf(age), phone, email, isPublic == 1, price, from, to, t_id, fname == null ? "Public coach" : fname + " " + lname);
                 Global.memberModel.add(m);
-                System.out.println(m.id);
+                tot += memberPrice[price];
             }
+            total.setText(String.valueOf(tot));
             Global.memberModel.forEach(ele -> {
-
                 model.addRow(new Object[]{ele.id, ele.name, ele.trainerName, ele.isMale ? "male" : "female", ele.age, ele.phoneNumber, ele.email, ele.isPublic ? "Public coach" : "Private coach", memberPrice[ele.price], ele.from, ele.to});
             });
 
