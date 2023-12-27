@@ -14,14 +14,14 @@ CREATE TABLE admin (
 
 CREATE TABLE trainers (
     id BIGINT PRIMARY KEY,
-    fname TEXT NOT NULL,
-    lname TEXT NOT NULL,
-    phone TEXT NOT NULL,
-    gender INT NOT NULL,
-    experience INT NOT NULL,
-    age INT NOT NULL,
-    work_time INT NOT NULL,
-    email TEXT NOT NULL
+    fname TEXT NULL,
+    lname TEXT NULL,
+    phone TEXT NULL,
+    gender INT NULL,
+    experience INT NULL,
+    age INT NULL,
+    work_time INT NULL,
+    email TEXT NULL
 );
   
 
